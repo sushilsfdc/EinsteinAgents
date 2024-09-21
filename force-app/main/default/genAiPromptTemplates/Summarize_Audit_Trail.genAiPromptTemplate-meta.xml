@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
-    <activeVersion>2</activeVersion>
+    <activeVersion>5</activeVersion>
+    <description>This template helps system admin summarize audit trail for particular user</description>
     <developerName>Summarize_Audit_Trail</developerName>
     <masterLabel>Summarize Audit Trail</masterLabel>
     <templateVersions>
         <content>You are system admin of the org and need to analyze setup audit trail to find out what particular user did in org on particular day. 
 
-[PLACE_HOLDER_FOR_APEX_CLASS]
+
 
 Look at setup audit trail data for user and summarize everything user did on particular day. If there is no data provided above, Just answer that no data available for this user, Do not provide any other information. 
 </content>
-        <inputs>
-            <apiName>User_Id</apiName>
-            <definition>primitive://String</definition>
-            <masterLabel>User Id</masterLabel>
-            <referenceName>Input:User_Id</referenceName>
-            <required>true</required>
-        </inputs>
         <inputs>
             <apiName>Activity_Date</apiName>
             <definition>primitive://String</definition>
@@ -24,9 +18,41 @@ Look at setup audit trail data for user and summarize everything user did on par
             <referenceName>Input:Activity_Date</referenceName>
             <required>true</required>
         </inputs>
-        <primaryModel>sfdc_ai__DefaultOpenAIGPT4</primaryModel>
+        <inputs>
+            <apiName>User_Id</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>User Id</masterLabel>
+            <referenceName>Input:User_Id</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT35Turbo</primaryModel>
         <status>Published</status>
         <versionNumber>1</versionNumber>
+    </templateVersions>
+    <templateVersions>
+        <content>You are system admin of the org and need to analyze setup audit trail to find out what particular user did in org on particular day. 
+
+
+
+Look at setup audit trail data for user and summarize everything user did on particular day. If there is no data provided above, Just answer that no data available for this user, Do not provide any other information. 
+</content>
+        <inputs>
+            <apiName>Activity_Date</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Activity Date</masterLabel>
+            <referenceName>Input:Activity_Date</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>User_Id</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>User Id</masterLabel>
+            <referenceName>Input:User_Id</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT35Turbo</primaryModel>
+        <status>Published</status>
+        <versionNumber>2</versionNumber>
     </templateVersions>
     <templateVersions>
         <content>You are system admin of the org and need to analyze setup audit trail to find out what particular user did in org on particular day. 
@@ -36,17 +62,99 @@ Look at setup audit trail data for user and summarize everything user did on par
 Look at setup audit trail data for user and summarize everything user did on particular day. If there is no data provided above, Just answer that no data available for this user, Do not provide any other information. 
 </content>
         <inputs>
+            <apiName>Activity_Date</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Activity Date</masterLabel>
+            <referenceName>Input:Activity_Date</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
             <apiName>User_Id</apiName>
             <definition>primitive://String</definition>
             <masterLabel>User Id</masterLabel>
             <referenceName>Input:User_Id</referenceName>
             <required>true</required>
         </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT35Turbo</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://SummarizeAuditTrail</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Activity_Date</parameterName>
+                <valueExpression>{!$Input:Activity_Date}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>User_Id</parameterName>
+                <valueExpression>{!$Input:User_Id}</valueExpression>
+            </parameters>
+            <referenceName>Apex:SummarizeAuditTrail</referenceName>
+        </templateDataProviders>
+        <versionNumber>3</versionNumber>
+    </templateVersions>
+    <templateVersions>
+        <content>You are system admin of the org and need to analyze setup audit trail to find out what particular user did in org on particular day. Look at setup audit trail data provided below for user and summarize everything user did in the org. If there is no data provided below, Just answer that no data available for this user, Do not provide any other information. 
+
+{!$Apex:SummarizeAuditTrail.Prompt}
+
+
+</content>
         <inputs>
             <apiName>Activity_Date</apiName>
             <definition>primitive://String</definition>
             <masterLabel>Activity Date</masterLabel>
             <referenceName>Input:Activity_Date</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>User_Id</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>User Id</masterLabel>
+            <referenceName>Input:User_Id</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT35Turbo</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://SummarizeAuditTrail</definition>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Activity_Date</parameterName>
+                <valueExpression>{!$Input:Activity_Date}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>User_Id</parameterName>
+                <valueExpression>{!$Input:User_Id}</valueExpression>
+            </parameters>
+            <referenceName>Apex:SummarizeAuditTrail</referenceName>
+        </templateDataProviders>
+        <versionNumber>4</versionNumber>
+    </templateVersions>
+    <templateVersions>
+        <content>You are system admin of the org and need to analyze setup audit trail to find out what particular user did in org on particular day. Look at setup audit trail data provided below for user and summarize everything user did in the org. Output should contain numbered points. If there is no data provided below, Just answer that no data available for this user, Do not provide any other information. 
+
+{!$Apex:SummarizeAuditTrail.Prompt}
+
+
+</content>
+        <inputs>
+            <apiName>Activity_Date</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Activity Date</masterLabel>
+            <referenceName>Input:Activity_Date</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>User_Id</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>User Id</masterLabel>
+            <referenceName>Input:User_Id</referenceName>
             <required>true</required>
         </inputs>
         <primaryModel>sfdc_ai__DefaultOpenAIGPT4</primaryModel>
@@ -67,7 +175,7 @@ Look at setup audit trail data for user and summarize everything user did on par
             </parameters>
             <referenceName>Apex:SummarizeAuditTrail</referenceName>
         </templateDataProviders>
-        <versionNumber>2</versionNumber>
+        <versionNumber>5</versionNumber>
     </templateVersions>
     <type>einstein_gpt__flex</type>
     <visibility>Global</visibility>

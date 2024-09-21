@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlanner xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This agent helps with system admin tasks.</description>
+    <genAiPlugins>
+        <genAiPluginName>Admin_Tasks</genAiPluginName>
+    </genAiPlugins>
+    <masterLabel>Admin Agent</masterLabel>
+    <plannerType>AiCopilot__ReAct</plannerType>
+</GenAiPlanner>
