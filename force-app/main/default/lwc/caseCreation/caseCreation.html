@@ -3,7 +3,10 @@
         <div class="slds-p-around_medium">
             <lightning-input label="Subject" value={subject} onchange={handleSubjectChange}></lightning-input>
             <lightning-textarea label="Description" value={description} onchange={handleDescriptionChange}></lightning-textarea>
-            <lightning-button label="Create Case" variant="brand" onclick={handleCreateCase} class="slds-m-top_medium"></lightning-button>
         </div>
+        <div class="slds-m-top_small slds-m-top_medium">
+            <lightning-button label="Create Case" variant="brand" onclick={handleCreateCase} class="slds-m-top_medium"></lightning-button>
+        </div>      
     </lightning-card>
+
 </template>
