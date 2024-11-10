@@ -13,20 +13,22 @@ public with sharing class CaseCreationController {
 
     private static boolean detectPII(String subject, String description){
         boolean piiDetected = false;
-        // Map for holding input parameters
-        Map<String, ConnectApi.WrappedValue> inputParams = new Map<String, ConnectApi.WrappedValue>();
-        Map<String, String> input = new Map<String, String>();
 
-        // Add wrapped values
-        ConnectApi.WrappedValue inputValueMap = new ConnectApi.WrappedValue();
-        inputValueMap.value = subject;
-        inputParams.put('Input:subject', inputValueMap);
+        // Create Prompt Input Parameter Variables
+        ConnectApi.WrappedValue inputValueMapSubject = new ConnectApi.WrappedValue();
+        inputValueMapSubject.value = subject;
+        ConnectApi.WrappedValue inputValueMapDescription = new ConnectApi.WrappedValue();
+        inputValueMapDescription.value = description;
 
-        ConnectApi.WrappedValue inputValueMapDesc = new ConnectApi.WrappedValue();
-        inputValueMapDesc.value = description;
-        inputParams.put('Input:description', inputValueMapDesc);      
+        //Add Prompt input variables to a Map
+        Map<String, ConnectApi.WrappedValue> inputParams = new Map<String, ConnectApi.WrappedValue>();        
+        inputParams.put('Input:subject', inputValueMapSubject);
+        inputParams.put('Input:description', inputValueMapDescription);      
+
+        //Invoke the Prompt 
         String response = PromptUtils.invokePrompt('Case_PII_Detection', inputParams);
-        System.debug('response - ' + response);
+
+        //Check if prompt contained PII
         if(!response.containsIgnoreCase('NO PII DETECTED')){ 
             piiDetected = true;
         }
