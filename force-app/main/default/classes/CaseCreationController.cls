@@ -7,7 +7,7 @@ public with sharing class CaseCreationController {
                 newCase.Description = description;
                 insert newCase;
             }else{
-                throw new AuraHandledException('Your subject or description contains some PII');
+                throw new AuraHandledException('Your subject or description contains some PII. Please remove PII before submitting the case.');
             }
     }
 
